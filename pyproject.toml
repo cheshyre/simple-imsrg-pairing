@@ -1,0 +1,20 @@
+[tool.poetry]
+name = "simple-imsrg-pairing"
+version = "0.1.0"
+description = ""
+authors = ["Matthias Heinz <heinz.matthias.3@gmail.com>"]
+license = "MIT"
+readme = "README.md"
+packages = [{include = "simple_imsrg_pairing"}]
+
+[tool.poetry.dependencies]
+python = ">=3.8,<3.12"
+numpy = "^1.19"
+scipy = "^1.10"
+
+[tool.poetry.group.dev.dependencies]
+black = "^23.3.0"
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"
