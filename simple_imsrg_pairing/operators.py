@@ -72,6 +72,13 @@ class Op1B:
 
         return new_op
 
+    def unitary_transform(self, c):
+        new_op = Op1B(self.basis, self.herm)
+
+        new_op.mat += np.einsum("pi,pq,qj->ij", c, self.mat, c, optimize=True)
+
+        return new_op
+
 
 class Op2B:
     def __init__(self, basis: Basis, herm: str = "herm") -> None:
@@ -145,5 +152,14 @@ class Op2B:
         new_op.mat += self.mat
         new_op.mat += factor * np.einsum("pqrs->rspq", self.mat, optimize=True)
         new_op.mat *= 1 / 2
+
+        return new_op
+
+    def unitary_transform(self, c):
+        new_op = Op2B(self.basis, self.herm)
+
+        new_op.mat += np.einsum(
+            "pi,qj,rk,sl,pqrs->ijkl", c, c, c, c, self.mat, optimize=True
+        )
 
         return new_op
