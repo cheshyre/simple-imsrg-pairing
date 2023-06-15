@@ -5,6 +5,8 @@
 
 from typing import Tuple
 
+import numpy as np
+
 from .basis import Basis
 from .operators import Op1B, Op2B
 
@@ -33,3 +35,12 @@ def get_pairing_hamiltonian(basis: Basis, g: float) -> Tuple[Op1B, Op2B]:
                         h2.mat[p][q][r][s] = 1 / 2 * g
 
     return h1, h2
+
+
+def get_perturbation(basis: Basis, gpert: float) -> Op2B:
+    dim = len(basis)
+    # 2-body
+    h2_pert = Op2B(basis)
+    h2_pert.mat = gpert * (np.random.rand(dim, dim, dim, dim) - 0.5)
+
+    return h2_pert.antisymmetrize().hermitize()
