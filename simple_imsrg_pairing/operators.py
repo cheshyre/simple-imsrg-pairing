@@ -20,6 +20,8 @@ class Op1B:
             raise Exception
         self.mat += other.mat
 
+        return self
+
     def __add__(self, other):
         new_op = Op1B(self.basis, self.herm)
         new_op.mat += self.mat
@@ -32,6 +34,8 @@ class Op1B:
             raise Exception
         self.mat -= other.mat
 
+        return self
+
     def __sub__(self, other):
         new_op = Op1B(self.basis, self.herm)
         new_op.mat += self.mat
@@ -42,7 +46,10 @@ class Op1B:
     def __imul__(self, factor):
         self.mat *= factor
 
+        return self
+
     def __mul__(self, factor):
+        print("Calling mul")
         new_op = Op1B(self.basis, self.herm)
         new_op.mat += self.mat
         new_op *= factor
@@ -92,6 +99,8 @@ class Op2B:
             raise Exception
         self.mat += other.mat
 
+        return self
+
     def __add__(self, other):
         new_op = Op2B(self.basis, self.herm)
         new_op.mat += self.mat
@@ -104,6 +113,8 @@ class Op2B:
             raise Exception
         self.mat -= other.mat
 
+        return self
+
     def __sub__(self, other):
         new_op = Op2B(self.basis, self.herm)
         new_op.mat += self.mat
@@ -113,6 +124,8 @@ class Op2B:
 
     def __imul__(self, factor):
         self.mat *= factor
+
+        return self
 
     def __mul__(self, factor):
         new_op = Op2B(self.basis, self.herm)
