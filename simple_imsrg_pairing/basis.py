@@ -8,6 +8,7 @@ import numpy as np
 
 class Basis:
     def __init__(self, n_levels: int, filled_levels: int) -> None:
+        self.key = (n_levels, filled_levels)
         self.states = np.zeros((n_levels * 2, 4), dtype=int)
         counter = 0
         for n in range(n_levels):
@@ -33,6 +34,12 @@ class Basis:
 
     def __getitem__(self, i: int):
         return self.states[i]
+
+    def __eq__(self, other) -> bool:
+        return self.key == other.key
+
+    def __ne__(self, other) -> bool:
+        return self.key != other.key
 
     def print(self, fn=None):
         fstring = "{:>5} {:>4} {:>4} {:>4}"
